@@ -20,8 +20,12 @@ app.route('/api/employees/').get((req, res) => {
 
 app.route('/api/employees/names/:names').get((req, res) => {
     const requestedName = req.params['names'];
+    // console.log(requestedName);
+    // console.log(`${(data['employees'][0]['First Name'].toLowerCase())} ${(data['employees'][0]['Surname'].toLowerCase())}`);
     const result = data['employees'].filter((employee) => {
-        return (employee['First Name'].toLowerCase()).includes(requestedName.toLowerCase()) || (employee['Surname'].toLowerCase()).includes(requestedName.toLowerCase());
+        return (employee['First Name'].toLowerCase()).includes(requestedName.toLowerCase())
+        || (employee['Surname'].toLowerCase()).includes(requestedName.toLowerCase())
+        || `${(employee['First Name'].toLowerCase())}${(employee['Surname'].toLowerCase())}`.includes(requestedName.toLowerCase());
     });
     res.send({ result });
 });
