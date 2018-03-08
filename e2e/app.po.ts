@@ -16,4 +16,12 @@ export class AppPage {
   getAllElements(selector: string) {
     return element.all(by.css(selector));
   }
+
+  getSearchInput() {
+    return element(by.css('.search'));
+  }
+
+  getAutocompleteNames() {
+    return element.all(by.css('.autocomplete-names'));
+  }
 }
