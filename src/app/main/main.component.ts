@@ -17,10 +17,8 @@ export class MainComponent {
   selectedEmployee: Employee;
 
   search(event: any) {
-    this.httpClient.get(`${url}/employees?q=${event.target.value}`)
-    .subscribe((data: any[]) => {
-      this.employees = data;
-    });
+    this.employees = [];
+    this.getUserByNames(event.target.value);
     if (!this.allowDropdown) {
       this.toggleDropdown();
     }
@@ -32,12 +30,35 @@ export class MainComponent {
     }
   }
 
+  getUserByNames(name: string) {
+    if (name === '') {return; }
+    this.httpClient.get(`${url}/employees/names/${name}`)
+    .subscribe((data: any[]) => {
+      this.employees = data['result'];
+    });
+  }
+
+  getUserByName(name: string){
+    this.httpClient.get(`${url}/employees/name/${name}`)
+    .subscribe((data: any[]) => {
+      this.employees = data['result'];
+    });
+  }
+
+  getUserBySurname(surname: string){
+    this.httpClient.get(`${url}/employees/surname/${surname}`)
+    .subscribe((data: any[]) => {
+      this.employees = data['result'];
+    });
+  }
+
   getUserById(id: number) {
     this.toggleDropdown();
-    this.httpClient.get(`${url}/employees?ID=${id}`)
+    this.httpClient.get(`${url}/employees/ID/${id}`)
     .subscribe((data: any[]) => {
       this.selectedUser = true;
-      this.selectedEmployee = data[0];
+      this.selectedEmployee = data['result'][0];
+      console.log(this.selectedEmployee);
     });
   }
 
