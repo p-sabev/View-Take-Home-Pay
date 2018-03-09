@@ -8,7 +8,7 @@
     </div>
   </div>
   <div *ngIf="selectedUser" class="employeeBox clearfix">
-    <h3>{{selectedEmployee.Title}}{{selectedEmployee["First Name"]}} {{selectedEmployee.Surname}}</h3>
+    <h3>{{selectedEmployee.Title | lowercase}}{{selectedEmployee["First Name"]}} {{selectedEmployee.Surname}}</h3>
     <div class="clearfix">
       <div class="half right">Salary:</div>
       <div class="half left">{{selectedEmployee.Salary}}$</div>
